@@ -1,8 +1,5 @@
 package com.qa.app;
 
-import java.io.File;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qa.account.Account;
 import com.qa.account.AccountManager;
 import com.qa.jsonobject.JsonObject;
@@ -24,7 +21,6 @@ public class App {
 		
 		JsonObject jo = new JsonObject();
 		jo.ObjectJsonFile(a1);
-		System.out.println(jo.JsonToObjectFile("c:\\file.json"));
 		
 		System.out.println(am.mapToJson(am.getAccounts()));
 	}
