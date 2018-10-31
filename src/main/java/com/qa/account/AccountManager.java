@@ -39,5 +39,10 @@ public class AccountManager {
 	    }	
 	    return count;
 	}
+	
+	public long countNameOccurencesStream(String name) {
+		return accountMap.entrySet().stream().filter(n -> n.getValue().getfName()==name).count();
+	}
+	
 		
 }
