@@ -1,12 +1,13 @@
-package com.qa.account;
+package com.qa.business.service;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.qa.jsonobject.JsonObject;
+import com.qa.persistence.domain.Account;
+import com.qa.util.JsonObject;
 
-public class AccountManager {
+public class AccountManagerImpl {
 	private HashMap<Integer, Account> accountMap = new HashMap<>();
 
 	public void addAccount(Account a) {
