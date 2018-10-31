@@ -19,10 +19,11 @@ public class App {
 		//am.deleteAccount(1234);
 		//System.out.println(am.getAccounts());
 		
-		JsonObject jo = new JsonObject();
+		
+		/*JsonObject jo = new JsonObject();
 		jo.ObjectJsonFile(a1);
 		
 		System.out.println(am.mapToJson(am.getAccounts()));
-	}
+	*/}
 
 }
