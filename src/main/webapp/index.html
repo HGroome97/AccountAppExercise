@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Menu</title>
+  </head>
+  <body>
+    <button type="submit" name="button" onclick="getAllAccounts()">Get All Accounts</button>
+    <br/>
+    <input id = "deleteInput" type="number" placeholder="Enter ID" alt="Enter ID"></input>
+    <button type="submit" name="button" onclick="deleteID()">Delete Account</button>
+
+    <br/>
+    <input id = "getInput" type="number" placeholder="Enter ID" alt="Enter ID"></input>
+    <button type="submit" name="button" onclick="getID()">Get Account</button>
+
+    <p id = "response"></p>
+    <button type="submit" name="button" onclick="location.href= './createAccount.html'">Create Account</button>
+
+
+
+    <table align='center' cellspacing=2 cellpadding=5 id="data_table" border=1>
+      <tr>
+        <th>ID</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Account Number</th>
+      </tr>
+
+      <tr>
+          <td><input type="text" id="id" disabled></td>
+          <td><input type="text" id="Forename"></td>
+          <td><input type="text" id="Surname"></td>
+          <td><input type="text" id="AccNum"></td>
+          <td><input type="button" class="add" onclick="add_row();" value="Add Row"></td>
+      </tr>
+
+</table>
+
+    <script>
+        function deleteID(){
+          var x = new XMLHttpRequest();
+          var url = "http://localhost:8081/accountapp/api/account/deleteAccount/"+deleteInput.value;
+          x.open("DELETE", url);
+          x.send();
+          getAllAccounts();
+        }
+        function getID(){
+          var x = new XMLHttpRequest();
+          var url = "http://localhost:8081/accountapp/api/account/getAccount/"+getInput.value;
+          x.open("GET", url, false);
+          x.send();
+          document.getElementById("response").innerHTML = x.response;
+        }
+
+        function getAllAccounts(){
+          var x = new XMLHttpRequest();
+          var url = "http://localhost:8081/accountapp/api/account/getAllAccounts";
+          x.open("GET", url, false);
+          x.send();
+          document.getElementById("response").innerHTML = x.response;
+          populateTable(x.responseText);
+        }
+
+
+        function createAccount(fName, lName, an){
+          var x = new XMLHttpRequest();
+          var url = "http://localhost:8081/accountapp/api/account/createAccount";
+          x.open("POST", url, true);
+          x.send(JSON.stringify({firstName:fName,secondName:lName,accountNumber:an}));
+
+        }
+
+        function add_row() {
+          var Forename = document.getElementById("Forename").value;
+          var Surname = document.getElementById("Surname").value;
+          var AccNum = document.getElementById("AccNum").value;
+
+          createAccount(Forename,Surname,AccNum);
+
+          var table = document.getElementById("data_table");
+          var table_len = (table.rows.length) - 1;
+          var row = table.insertRow(table_len).outerHTML = "<tr id='row" + table_len + "'><td id='id_row" + table_len + "'>" + id + "</td><td id='fName_row" + table_len + "'>" + Forename + "</td><td id='sName_row" + table_len + "'>" + Surname + "</td><td id='accNum_row" + table_len + "'>" + AccNum + "</td><td><input type='button' id='edit_button" + table_len + "' value='Edit' class='edit' onclick='edit_row(" + table_len + ")'> <input type='button' id='save_button" + table_len + "' value='Save' class='save' onclick='save_row(" + row + ")'> <input type='button' value='Delete' class='delete' onclick='delete_row(" + row + ")'></td></tr>";
+
+
+          document.getElementById("Forename").value = "";
+          document.getElementById("Surname").value = "";
+          document.getElementById("AccNum").value = "";
+
+        }
+
+        function populateTable(jsonT) {
+          var jsonTest = jsonT;
+          var myObj = JSON.parse(jsonTest);
+          var table = document.getElementById("data_table");
+          for (x in myObj) {
+            var id = myObj[x].id;
+            var Forename = myObj[x].firstName;
+            var Surname = myObj[x].secondName;
+            var AccNum = myObj[x].accountNumber;
+            var table_len = (table.rows.length) - 1;
+            var row = table.insertRow(table_len).outerHTML = "<tr id='row" + table_len + "'><td id='id_row" + table_len + "'>" + id + "</td><td id='fName_row" + table_len + "'>" + Forename + "</td><td id='sName_row" + table_len + "'>" + Surname + "</td><td id='accNum_row" + table_len + "'>" + AccNum + "</td><td><input type='button' id='edit_button" + table_len + "' value='Edit' class='edit' onclick='edit_row(" + table_len + ")'> <input type='button' id='save_button" + table_len + "' value='Save' class='save' onclick='save_row(" + id + ")'> <input type='button' value='Delete' class='delete' onclick='delete_row(" + id + ")'></td></tr>";
+          }
+        }
+
+        function delete_row(no) {
+          var x = new XMLHttpRequest();
+          var url = "http://localhost:8081/accountapp/api/account/deleteAccount/"+no;
+          x.open("DELETE", url);
+          x.send();
+          document.getElementById("row" + no + "").outerHTML = "";
+
+        }
+    </script>
+
+  </body>
+</html>

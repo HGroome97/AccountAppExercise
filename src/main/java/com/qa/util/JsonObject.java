@@ -1,4 +1,4 @@
-package com.qa.jsonobject;
+package com.qa.util;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.qa.account.Account;
+import com.qa.persistence.domain.Account;
 
 public class JsonObject {
 	

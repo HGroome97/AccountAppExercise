@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Create Account</title>
+  </head>
+  <body>
+    <form class="" action="index.html" method="post">
+
+      <input id = "firstNameInput" type="text" placeholder="Enter Forename" alt="Enter Forename" required="required"></input>
+      <input id = "secondNameInput" type="text" placeholder="Enter Surname" alt="Enter Surname" required="required"></input>
+      <input id = "accountNumberInput" type="text" placeholder="Enter Account Number" alt="Enter Account Number" required="required"></input>
+
+    </form>
+    <button type="submit" name="button" onclick="getVars()">Create Account</button>
+  </body>
+
+  <script type="text/javascript">
+    function createAccount(fName, lName, an){
+      var x = new XMLHttpRequest();
+      var url = "http://localhost:8081/accountapp/api/account/createAccount";
+      x.open("POST", url, true);
+      x.send(JSON.stringify({firstName:fName,secondName:lName,accountNumber:an}));
+
+      location.href="./creationsuccess.html";
+
+    }
+    function getVars(){
+        var fName = document.getElementById('firstNameInput').value;
+        var lName = document.getElementById('secondNameInput').value;
+        var an = document.getElementById('accountNumberInput').value;
+
+        createAccount(fName, lName, an);
+    }
+  </script>
+</html>
