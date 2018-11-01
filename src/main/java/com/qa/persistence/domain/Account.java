@@ -17,7 +17,7 @@ public class Account {
 	@Size(min = 6, max = 6)
 	private int accountNumber;
 	
-	public Account(String fName, String lName, int accountNumber) {
+	public Account(int accountNumber, String fName, String lName) {
 		this.fName = fName;
 		this.lName = lName;
 		this.accountNumber = accountNumber;

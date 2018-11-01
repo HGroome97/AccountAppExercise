@@ -49,11 +49,10 @@ public class JsonObject {
 	}
 	
 	
-	public String ObjectJsonString(Account acc) {
+	public String ObjectJsonString(Object ob) {
 		
 		try {
-			String stringToJson = mapper.writeValueAsString(acc);
-	    	return stringToJson; 
+			return mapper.writeValueAsString(ob);
 		} catch (JsonGenerationException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {
@@ -76,7 +75,7 @@ public class JsonObject {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return new Account(null,null,0);
+		return new Account(0, null,null);
 	}
 	
 	public Account JsonToObjectURL(String URL) {
@@ -91,7 +90,7 @@ public class JsonObject {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return new Account(null,null,0);
+		return new Account(0, null,null);
 	}
 	
 	public Account JsonToObjectString(String Json) {
@@ -106,7 +105,7 @@ public class JsonObject {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return new Account(null,null,0);
+		return new Account(0, null,null);
 	}
 	
 
