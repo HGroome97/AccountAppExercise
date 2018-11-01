@@ -5,6 +5,7 @@ import static javax.transaction.Transactional.TxType.SUPPORTS;
 
 import java.util.Collection;
 
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +16,7 @@ import com.qa.persistence.domain.Account;
 import com.qa.util.JsonObject;
 
 @Transactional(SUPPORTS)
-
+@Default
 public class AccountDBRepository implements AccountRepository {
 
 	@PersistenceContext(unitName = "primary")
@@ -52,20 +53,11 @@ public class AccountDBRepository implements AccountRepository {
 	}
 	
 	@Transactional(REQUIRED)
-	public String updateAccount(int accountNum, String fName, String lName) {
-		//int query = manager.createQuery("UPDATE a FROM Account a SET fName = "+fName+", lName = "+lName+ " WHERE accountnumber = "+accountNum).executeUpdate();
-		Account accountInDB = findAccount(accountNum);
-		accountInDB.setfName(fName);
-		accountInDB.setlName(lName);
-		return "{\"message\": \"account has been sucessfully updated\"}";
-	}
-	
-	@Transactional(REQUIRED)
 	public String updateAccount(Account acc) {
 		//int query = manager.createQuery("UPDATE a FROM Account a SET fName = "+fName+", lName = "+lName+ " WHERE accountnumber = "+accountNum).executeUpdate();
 		Account accountInDB = findAccount(acc.getAccountNumber());
-		accountInDB.setfName(accountInDB.getfName());
-		accountInDB.setlName(accountInDB.getlName());
+		accountInDB.setfName(acc.getfName());
+		accountInDB.setlName(acc.getlName());
 		return "{\"message\": \"account has been sucessfully updated\"}";
 	}
 	

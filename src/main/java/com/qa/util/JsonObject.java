@@ -11,9 +11,11 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qa.persistence.domain.Account;
+import com.google.gson.Gson;
 
 public class JsonObject {
 	
+
 	private ObjectMapper mapper;
 	
 	public JsonObject() {
@@ -98,6 +100,7 @@ public class JsonObject {
 		try {
 			acc = mapper.readValue(Json, Account.class);
 			return acc;
+			//return new Account(0, acc.getfName(),acc.getlName());
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {
@@ -105,7 +108,8 @@ public class JsonObject {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return new Account(0, null,null);
+		return new Account(0, "test","test");
+		//return new Account(0, acc.getfName(),acc.getlName());
 	}
 	
 

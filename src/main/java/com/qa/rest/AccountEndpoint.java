@@ -39,7 +39,7 @@ public class AccountEndpoint {
 	}
 
 	@Path("/updateAccount")
-	@POST
+	@PUT
 	@Produces({ "application/json" })
 	public String updateAccount(String account) {
 		Account acc = jsonOb.JsonToObjectString(account);
